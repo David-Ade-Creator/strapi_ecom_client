@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Badge, Box, IconButton } from "@mui/material";
 import { PersonOutline,ShoppingOutlined,MenuOutline,SearchOutlined, Menu } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import {shades} from "../../theme"
+import {shades} from "../../theme";
+import { setIsCartOpen } from "../../state";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const cart = useSelector((state)=> state.cart.cart);
 
     return <Box
     display="flex"
@@ -37,9 +39,23 @@ const Navbar = () => {
                 <IconButton sx={{ color: "black"}}>
                     <PersonOutline />
                 </IconButton>
-                <IconButton sx={{ color: "black"}}>
+
+                <Badge badgeContent={cart.length} color="secondary" 
+                invisible={cart.length === 0}
+                sx={{"& .MuiBadge-badge": {
+                    right: 5,
+                    top:5,
+                    padding: " 0 4px",
+                    height: "14px",
+                    minWidth: "13px"
+                }}}
+                >
+                <IconButton
+                onClick={()=> dispatch(setIsCartOpen({}))}
+                 sx={{ color: "black"}}>
                     <ShoppingOutlined />
                 </IconButton>
+                </Badge>
                 <IconButton sx={{ color: "black"}}>
                     <MenuOutline />
                 </IconButton>
