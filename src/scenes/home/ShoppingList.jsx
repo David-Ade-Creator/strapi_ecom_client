@@ -20,10 +20,9 @@ const ShoppingList = () => {
 
   async function getItems() {
     const items = await fetch(
-      "http://localhost:1337/api/items?populate=image",
+      "https://ecommerce-dashboard-zial.onrender.com/api/items?populate=image",
       { method: "GET" }
     );
-    console.log(items)
     const itemsJson = await items.json();
     dispatch(setItems(itemsJson.data));
   }
@@ -32,13 +31,13 @@ const ShoppingList = () => {
     getItems();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const topRatedItems = items.filter(
+  const topRatedItems = items?.filter(
     (item) => item.attributes.category === "topRated"
   );
-  const newArrivalsItems = items.filter(
+  const newArrivalsItems = items?.filter(
     (item) => item.attributes.category === "newArrivals"
   );
-  const bestSellersItems = items.filter(
+  const bestSellersItems = items?.filter(
     (item) => item.attributes.category === "bestSellers"
   );
 

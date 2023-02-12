@@ -15,18 +15,8 @@ const Item = ({ item, width }) => {
   const {
     palette: { neutral },
   } = useTheme();
-
   const { category, price, name, image } = item.attributes;
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
-
+ 
   return (
     <Box width={width}>
       <Box
@@ -35,10 +25,10 @@ const Item = ({ item, width }) => {
         onMouseOut={() => setIsHovered(false)}
       >
         <img
-          alt={item.name}
+          alt={item?.name}
           width="300px"
           height="400px"
-          src={`http://localhost:1337${url}`}
+          src={image?.data?.attributes?.formats?.medium?.url}
           onClick={() => navigate(`/item/${item.id}`)}
           style={{ cursor: "pointer" }}
         />
